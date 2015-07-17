@@ -25,6 +25,9 @@ module OmniAuth
       end
 
       def callback_phase
+        puts '*'*70
+        puts 'in callback phase'
+        puts '*'*70
         unless request.params['SAMLResponse']
           raise OmniAuth::Strategies::SAML::ValidationError.new("SAML response missing")
         end
