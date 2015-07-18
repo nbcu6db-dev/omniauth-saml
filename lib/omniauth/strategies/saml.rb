@@ -25,9 +25,6 @@ module OmniAuth
       end
 
       def callback_phase
-        puts '*'*70
-        puts 'in callback phase'
-        puts '*'*70
         unless request.params['SAMLResponse']
           raise OmniAuth::Strategies::SAML::ValidationError.new("SAML response missing")
         end
@@ -48,6 +45,10 @@ module OmniAuth
 
         @name_id = response.name_id
         @attributes = response.attributes
+
+        puts '*'*60
+        puts "SAML RESPONSE: #{response.inspect}"
+        puts '*'*60
 
         if @name_id.nil? || @name_id.empty?
           raise OmniAuth::Strategies::SAML::ValidationError.new("SAML response missing 'name_id'")
